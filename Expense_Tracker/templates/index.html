@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h2>Welcome to Expense Tracker</h2>
+        <div class="header-actions">
+            <a href="/logout" class="button logout-button">Logout</a>
+        </div>
+
+        <div class="form-section">
+            <h3>Add New Expense</h3>
+            <form action="/add" method="post" class="expense-form">
+                <input type="date" name="date" required>
+                <select name="category">
+                    <option value="Food">🍲 Food</option>
+                    <option value="Rent">🏠 Rent</option>
+                    <option value="Travel">✈️ Travel</option>
+                    <option value="Utilities">💡 Utilities</option>
+                    <option value="Others">📦 Others</option>
+                </select>
+                <input type="number" step="0.01" name="amount" required placeholder="Amount">
+                <input type="text" name="description" placeholder="Description (Optional)">
+                <button type="submit" class="button primary-button">Add Expense</button>
+            </form>
+        </div>
+
+        <div class="filter-section">
+            <h3>Filter Expenses</h3>
+            <div class="filter-group">
+                <form method="GET" action="/" class="filter-form">
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ start_date or '' }}">
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date" value="{{ end_date or '' }}">
+                    <button type="submit" class="button secondary-button">Filter by Date Range</button>
+                </form>
+
+                <form method="POST" action="/" class="filter-form">
+                    <input type="number" name="month" min="1" max="12" placeholder="Enter month (1-12)">
+                    <button type="submit" class="button secondary-button">Filter by Month</button>
+                </form>
+            </div>
+        </div>
+
+        <h3>Your Expenses</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in expenses %}
+                <tr>
+                    <td data-label="Date">{{ e.date }}</td>
+                    <td data-label="Category">{{ e.category }}</td>
+                    <td data-label="Amount">₹{{ "{:,.2f}".format(e.amount) }}</td> <td data-label="Description">{{ e.description or 'N/A' }}</td>
+                    <td data-label="Actions"><a href="/delete/{{ e.id }}" class="delete-button" title="Delete Expense">🗑️</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="total-summary"><strong>Total:</strong> ₹{{ "{:,.2f}".format(total) }}</p>
+
+        <div class="download-buttons">
+            <a href="/download_csv" class="button download-button">Download CSV</a>
+            <a href="/download_pdf" class="button download-button">Download PDF</a>
+        </div>
+
+        <div class="chart-section">
+            <h3>Expense Summary Chart</h3>
+            <canvas id="chart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('chart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ chart_data.keys() | list | tojson }},
+                datasets: [{
+                    label: 'Expenses',
+                    data: {{ chart_data.values() | list | tojson }},
+                    backgroundColor: ['#3498db', '#e74c3c', '#f1c40f', '#2ecc71', '#9b59b6']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)' // Lighter grid lines for dark mode
+                        },
+                        ticks: {
+                            color: '#E0E0E0' // Tick labels color
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#E0E0E0'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#E0E0E0' // Legend text color
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dark-mode">
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h2>Login</h2>
+        <form method="post" class="expense-form">
+            <input type="text" name="username" required placeholder="Username"><br>
+            <input type="password" name="password" required placeholder="Password"><br>
+            <button type="submit" class="button primary-button">Login</button>
+        </form>
+        <p>New user? <a href="/register" class="button secondary-button">Register</a></p>
+    </div>
+</body>
+</html>

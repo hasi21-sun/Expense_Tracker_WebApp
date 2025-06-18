@@ -1,0 +1,410 @@
+/* Import a better font from Google Fonts (optional, but recommended) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Body Styles */
+body {
+    font-family: 'Poppins', sans-serif; /* Modern, clean font */
+    margin: 0;
+    padding: 0; /* Remove body padding here, container will handle it */
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh; /* Ensure body fills viewport height */
+    display: flex; /* Use flexbox to center content vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow-y: auto; /* Allow scrolling if content is tall */
+}
+
+/* Dark Mode Specifics */
+body.dark-mode {
+    background: linear-gradient(135deg, #101020, #0A0A15); /* Subtle gradient background */
+    color: #E0E0E0; /* Lighter text for contrast */
+}
+
+/* Main Container - The central card-like element */
+.container {
+    max-width: 950px; /* Slightly wider container */
+    width: 95%; /* Responsive width */
+    margin: 30px auto; /* More vertical margin */
+    padding: 40px; /* Increased padding inside container */
+    background-color: #1A1A30; /* Darker, sophisticated background */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Deeper shadow for depth */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+}
+
+h2, h3 {
+    color: #66FF99; /* Vibrant green for headings */
+    text-align: center;
+    margin-bottom: 30px; /* More space below headings */
+    font-weight: 600; /* Poppins semi-bold */
+}
+
+/* --- Navigation/Header Actions --- */
+.header-actions {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+/* --- Form Elements --- */
+input[type="date"],
+input[type="number"],
+input[type="text"],
+input[type="password"], /* Specifically included for consistency */
+select {
+    width: 100%; /* Full width within their parent */
+    padding: 12px 15px; /* More padding for inputs */
+    margin-bottom: 18px; /* Consistent spacing */
+    border: 1px solid #3A3A5A; /* Darker border */
+    background-color: #252540; /* Slightly lighter background than container */
+    color: #E0E0E0;
+    border-radius: 8px; /* Slightly more rounded */
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #66FF99; /* Highlight border on focus */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 255, 153, 0.3); /* Subtle glow */
+}
+
+input::placeholder {
+    color: #A0A0A0; /* Muted placeholder text */
+}
+
+/* Form Layouts */
+.form-section, .filter-section {
+    background-color: #1F1F35; /* Slightly distinct background for sections */
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px; /* Space between sections */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.expense-form, .filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Increased space between form elements */
+    align-items: flex-end;
+}
+
+.expense-form > *, .filter-form > * {
+    flex: 1; /* Allow items to grow */
+    min-width: 180px; /* Minimum width before wrapping */
+}
+
+.expense-form button, .filter-form button {
+    flex-grow: 0; /* Buttons don't grow as much as inputs */
+    min-width: auto; /* Reset min-width for buttons */
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between filter forms */
+}
+
+.filter-form label {
+    color: #C0C0C0;
+    margin-right: 10px; /* More space between label and input */
+    white-space: nowrap;
+    font-size: 0.95em;
+    font-weight: 300;
+}
+
+
+/* --- Button Styling --- */
+.button {
+    display: inline-block;
+    padding: 12px 25px; /* More padding for buttons */
+    margin: 5px;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded */
+    cursor: pointer;
+    font-size: 1em; /* Consistent font size */
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: center;
+    font-weight: 600; /* Poppins semi-bold */
+    letter-spacing: 0.5px;
+}
+
+.button:hover {
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.primary-button {
+    background-color: #66FF99; /* Bright green */
+    color: #1A1A30; /* Dark text for contrast */
+}
+
+.primary-button:hover {
+    background-color: #4DE084; /* Slightly darker green on hover */
+}
+
+.secondary-button {
+    background-color: #4A4A6A; /* Muted gray-blue */
+    color: #E0E0E0;
+}
+
+.secondary-button:hover {
+    background-color: #5A5A7A;
+}
+
+.download-buttons {
+    display: flex;
+    justify-content: center; /* Center download buttons */
+    gap: 15px; /* Space between download buttons */
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.download-button {
+    background-color: #00BFFF; /* Deep sky blue for download */
+    color: white;
+}
+
+.download-button:hover {
+    background-color: #009ACD;
+}
+
+.logout-button {
+    background-color: #E74C3C; /* Red for logout */
+    color: white;
+}
+
+.logout-button:hover {
+    background-color: #C0392B;
+}
+
+.delete-button {
+    color: #E74C3C; /* Red icon */
+    text-decoration: none;
+    font-size: 1.3em; /* Slightly larger icon */
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+    color: #FF0000;
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* --- Table Styling --- */
+table {
+    width: 100%;
+    border-collapse: separate; /* Use separate to allow border-radius on cells */
+    border-spacing: 0; /* Remove space between cells */
+    margin-bottom: 25px;
+    background-color: #252540; /* Slightly distinct background */
+    border-radius: 10px; /* Rounded table corners */
+    overflow: hidden; /* Ensures rounded corners apply to content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+th, td {
+    padding: 15px 20px; /* More padding for cells */
+    text-align: left;
+    border-bottom: 1px solid #3A3A5A; /* Lighter border for separation */
+    color: #E0E0E0;
+}
+
+th {
+    background-color: #3A3A5A; /* Darker header background */
+    color: #99FFFF; /* Light blue for headers */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+/* Style for first and last table headers for rounded corners */
+th:first-child { border-top-left-radius: 10px; }
+th:last-child { border-top-right-radius: 10px; }
+
+/* Style for first and last table data cells for rounded corners */
+tr:last-child td:first-child { border-bottom-left-radius: 10px; }
+tr:last-child td:last-child { border-bottom-right-radius: 10px; }
+
+
+tr:nth-child(even) {
+    background-color: #2A2A45; /* Zebra striping for readability */
+}
+
+tr:hover {
+    background-color: #353550; /* Highlight row on hover */
+}
+
+td:nth-child(3) { /* Amount column */
+    font-weight: 600;
+    color: #66FF99; /* Vibrant green for amounts */
+    font-size: 1.1em;
+}
+
+.total-summary {
+    font-size: 1.3em; /* Larger total text */
+    font-weight: 600;
+    text-align: right;
+    margin-top: 15px; /* Space from table */
+    margin-bottom: 30px;
+    color: #66FF99;
+}
+
+/* --- Chart Section --- */
+.chart-section {
+    background-color: #1F1F35;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* --- Flash Messages --- */
+.flash-message {
+    padding: 12px 25px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    animation: fadeInOut 4s forwards; /* Fades in and out */
+}
+
+.flash-success {
+    background-color: #2ECC71; /* Success green */
+    color: white;
+}
+
+.flash-error {
+    background-color: #E74C3C; /* Error red */
+    color: white;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* --- Login/Register Page Consistency --- */
+/* (These styles will apply automatically due to shared classes like .container and .button) */
+/* Add specific adjustments if needed */
+.container h2 {
+    margin-bottom: 35px; /* More space for page titles */
+}
+
+.container p { /* For "New user?" text */
+    text-align: center;
+    margin-top: 25px;
+    color: #C0C0C0;
+}
+
+.container p a {
+    color: #99FFFF; /* Link color */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.container p a:hover {
+    color: #66CCFF;
+    text-decoration: underline;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 15px auto;
+        padding: 20px;
+        width: 98%;
+    }
+
+    h2, h3 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .form-section, .filter-section {
+        padding: 15px;
+    }
+
+    .expense-form, .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .expense-form input,
+    .expense-form select,
+    .filter-form input,
+    .filter-form button {
+        width: 100%;
+        margin-bottom: 5px; /* Reduce margin for stacked inputs */
+    }
+
+    .filter-form label {
+        text-align: left;
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .button {
+        width: 100%;
+        margin: 5px 0; /* Full width and stacked */
+    }
+
+    .download-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Table Responsiveness (Card-like layout for small screens) */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px; /* Hide table headers visually */
+        left: -9999px;
+    }
+
+    tr {
+        border: 1px solid #3A3A5A;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    td {
+        border: none; /* Remove individual cell borders */
+        border-bottom: 1px solid #3A3A5A;
+        position: relative;
+        padding-left: 50%;
+        text-align: right; /* Align value to the right */
+    }
+
+    td:last-child {
+        border-bottom: none; /* No border for the last cell */
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px); /* Adjust width for label */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+        color: #C0C0C0;
+        text-align: left;
+    }
+
+    /* Adjust specific cells */
+    td:nth-child(3) { /* Amount column */
+        font-size: 1.2em; /* Make amount stand out */
+    }
+}
